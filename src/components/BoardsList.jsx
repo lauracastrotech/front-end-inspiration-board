@@ -24,9 +24,13 @@ const BoardsList = () => {
     const Boards = () => {
         return boardsData.map( board => {
             return (
-                <li key={board.id}>
-                    <Board title={board.title} owner={board.owner} selectBoard={onBoardSelect}/>
-                </li>
+                <Board 
+                    key={board.id}
+                    title={board.title} 
+                    owner={board.owner} 
+                    selectBoard={onBoardSelect}
+                />
+
             )
         })
     }

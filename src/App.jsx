@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import './App.css'
 import BoardsList from './components/BoardsList'
 
 const VITE_APP_BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>

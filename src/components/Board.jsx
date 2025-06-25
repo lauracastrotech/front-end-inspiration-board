@@ -6,11 +6,11 @@ const Board = ({title, owner, selectBoard}) => {
     }
 
     return (
-    <div>
+    <li>
         <p>{title}</p>
         <p>{owner}</p>
         <button onClick={handleBoardSelect}>View</button>
-    </div>
+    </li>
   )
 }
 
