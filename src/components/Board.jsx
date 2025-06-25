@@ -1,5 +1,5 @@
 
-const Board = ({title, owner, selectBoard}) => {
+const Board = ({title, owner, cards, selectBoard}) => {
     
     const handleBoardSelect = () => {
         selectBoard();

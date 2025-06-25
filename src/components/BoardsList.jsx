@@ -5,12 +5,14 @@ const dummyBoardsData = [
         {
             'board_id': 1,
             'title': 'Inspiring Board',
-            'owner': '1st Owner'
+            'owner': '1st Owner',
+            'cards': []
         },
         {
             'board_id': 2,
             'title': 'Very Inspiring Board',
-            'owner': '2nd Owner'
+            'owner': '2nd Owner',
+             'cards': []
         }
     ];
 
@@ -21,13 +23,15 @@ const BoardsList = () => {
     // const [isBoardFormVisible, setIsBoardFormVisible] = useState(false)
 
     const onBoardSelect = () => {};
+
     const Boards = () => {
         return boardsData.map( board => {
             return (
                 <Board 
-                    key={board.id}
+                    key={board.board_id}
                     title={board.title} 
                     owner={board.owner} 
+                    cards={board.cards}
                     selectBoard={onBoardSelect}
                 />
 
