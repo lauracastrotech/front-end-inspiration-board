@@ -6,15 +6,27 @@ const dummyBoardsData = [
         {
             'board_id': 1,
             'title': 'Inspiring Board',
-            'owner': '1st Owner',
+            'owner': 'Rachana',
             'cards': []
         },
         {
             'board_id': 2,
             'title': 'Very Inspiring Board',
-            'owner': '2nd Owner',
+            'owner': 'Olya',
             'cards': []
-        }
+        },
+        {
+            'board_id': 3,
+            'title': 'Amazing Board',
+            'owner': 'Laura',
+            'cards': []
+        },
+        {
+            'board_id': 4,
+            'title': 'Brilliant Board',
+            'owner': 'Wendy',
+            'cards': []
+        },
     ];
 
 // Container component that holds data about boards?
