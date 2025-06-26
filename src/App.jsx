@@ -1,35 +1,34 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import BoardsList from './components/BoardsList'
 
 const VITE_APP_BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL
-
+const dummyBoardsData = [
+  {
+    'board_id': 1,
+    'title': 'inspiring board',
+    'owner': 'Laura',
+    'cards': []
+  }
+]
 function App() {
-  const [count, setCount] = useState(0)
+    const [boardsData, setBoardsData] = useState(dummyBoardsData);
+    const [selectedBoard, setSelectedBoard] = useState({});
+    const [showBoardForm, setShowBoardForm] = useState(false);
+
+    const onBoardSelect = (id) => {
+        // use id to get board - axios get
+        // set the selectedBoard to the board i get from request
+        // <CardsList boardId={id}>
+    };
+    const addNewBoard = () => {};
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>Inspiration Board</h1>
+      <div id="flex-boards-list">
+        < BoardsList boards={boardsData} selectBoard={onBoardSelect} showForm={showBoardForm} createBoard={addNewBoard}/>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
