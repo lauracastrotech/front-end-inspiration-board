@@ -5,9 +5,18 @@ import './NewCardForm.css';
 // NewCardForm component to create a new card with a message
 // and a button to submit the form, which calls the onSubmit prop with the message
 // Preview of the card as shown below the input when typing in the input field
+const addNewCard = (newCardData) => {
+    return axios.post(`{BaseURL}/boards/${newCardData.boardId}/cards`, newCardData)
+    .then((response) => response.data)
+    .catch((error) => {
+        console.error('Error adding new card:', error);
+    });
+};
+
 const KDefaultFormState = {
     message: '',
     likesCount: 0,
+    boardId: 0, // Assuming boardId is needed for the card
 };
 const NewCardForm = (onPostCard) => {
   const [formData, setFormData] = useState(KDefaultFormState);
