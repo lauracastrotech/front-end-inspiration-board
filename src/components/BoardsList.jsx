@@ -3,7 +3,7 @@ import NewBoardForm from "./NewBoardForm";
 
 
 // Container component that holds data about boards?
-const BoardsList = ({boards, selectBoard, showForm, createBoard}) => {
+const BoardsList = ({boards, selectedBoardData, selectBoard, showForm, createBoard}) => {
 
     const Boards = () => {
         return boards.map( board => {
@@ -14,6 +14,7 @@ const BoardsList = ({boards, selectBoard, showForm, createBoard}) => {
                         title={board.title} 
                         owner={board.owner} 
                         cards={board.cards}
+                        selectedBoardData={selectedBoardData}
                         selectBoard={selectBoard}
                     />
                 </li>
