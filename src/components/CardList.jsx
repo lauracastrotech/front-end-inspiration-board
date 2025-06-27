@@ -2,11 +2,8 @@ import PropTypes from 'prop-types';
 import './CardList.css';
 import Card from './Card';
 
-// CardList component to display a list of cards,
-// each card contains a message, a like button, total likes and a delete button.
-
-const CardList = ({cards, onDeleteCard, onLikeCard}) => {
-
+const CardList = (props) => {
+  const {cards, onDeleteCard, onLikeCard} = props;
   const getCardComponents = cards.map((card) => {
     return (
       <li key={card.id}>

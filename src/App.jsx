@@ -6,8 +6,7 @@ import BoardView from './components/BoardView';
 import axios from 'axios';
 import BoardsList from './components/BoardsList';
 
-const KBaseURL = import.meta.env.VITE_API_BASE_URL
-console.log('Base URL:', KBaseURL);
+const KBaseURL = import.meta.env.VITE_API_BASE_URL;
 
 // Main App component:
 // - Fetches boards from the backend (GET request)
@@ -89,11 +88,32 @@ const likeCardAPI = (cardId) => {
     });
 };
 
+// const dummyBoard = {
+//   'id': 2,
+//   'title':'help',
+//   'owner':'us',
+// };
+// const dummycards= [
+//     {
+//       "board_id": 1,
+//       "id": 3,
+//       "likes_count": 0,
+//       "message": "hello"
+//     },
+//     {
+//       "board_id": 1,
+//       "id": 4,
+//       "likes_count": 0,
+//       "message": "hello"
+//     }
+//   ];
+
+
 const App = () => {
-  const [boardData, setBoardData] = useState([]);
+  const [boardData, setBoardData] = useState([]); // all boards
   const [selectedBoard, setSelectedBoard] = useState(null);
-  const [cardData, setCardData] = useState([]);
-  const [showForm, setShowForm] = useState(false)
+  const [cardData, setCardData] = useState([]); // all cards
+  const [showForm, setShowForm] = useState(false); // board form
 
   // Fetch all boards on mount
   const getAllBoards = () => {
@@ -103,7 +123,10 @@ const App = () => {
       });
   };
   useEffect(() => {
-    getAllBoards();
+    const response = getAllBoards();
+    console.log('this is the response:', response);
+
+    // this returns undefined
   }, []);
 
   const addBoard = (newBoardData) => {
@@ -155,16 +178,16 @@ const App = () => {
 
   // Handle selecting a board and fetching its cards
   const handleSelectBoard = (id) => {
-    const board = axios.get(`${KBaseURL}/boards/${id}`)
+    axios.get(`${KBaseURL}/boards/${id}`)
       .then(response => {
+        console.log(response);
         setSelectedBoard(response.data);
+        getCardsForBoardAPI(response.data.id).then((cards) => {
+        setCardData(cards);
       })
       .catch(error => {
         console.error('Error fetching boards:', error);
       });
-
-    getCardsForBoardAPI(board.id).then((cards) => {
-      setCardData(cards);
     });
   };
 
@@ -175,7 +198,7 @@ const App = () => {
         <BoardsList 
           boards={boardData}
           selectedBoard={selectedBoard}
-          cardState={cardData}
+          cardDataState={cardData}
           onSelectBoard={handleSelectBoard}
           onDeleteCard={deleteCard}
           onLikeCard={likeCardHandler}
@@ -185,18 +208,6 @@ const App = () => {
           addNewBoard={addBoard}
         />
       </div>
-      {/* {selectedBoard && (
-        <Board
-          key={selectedBoard.id}
-          board={selectedBoard}
-          cards={cardData}
-          onSelect={handleSelectBoard}
-          onDeleteCard={deleteCard}
-          onLikeCard={likeCardHandler}
-          onPostCard={addCard}
-        />
-      )} */}
-
     </div>
   );
 };

@@ -3,21 +3,15 @@ import CardList from './CardList';
 import NewCardForm from './NewCardForm';
 
 const Board = (props) => {
-  const { title, owner, id, cards, onDeleteCard, onLikeCard, onPostCard, onSelectBoard } = props;
-    const selectBoard = () => {
-      console.log(id);
+  const { title, owner, id, onDeleteCard, onLikeCard, onPostCard, onSelectBoard } = props;
+    const viewBoard = () => {
       onSelectBoard(id);
     };
+
     return (
     <section>
         <p>{title}&#58; <span>{owner}</span></p>
-        <button onClick={selectBoard}>Select</button>
-        {/* <NewCardForm onPostCard={onPostCard} boardId={id} />*/}
-        <CardList
-          cards={cards}
-          onDeleteCard={onDeleteCard}
-          onLikeCard={onLikeCard}
-        /> 
+        <button onClick={viewBoard}>View</button>
     </section>
 
   );
@@ -40,10 +34,3 @@ Board.propTypes = {
 };
 
 export default Board;
-
-//   id: PropTypes.number.isRequired,  
-//   title: PropTypes.string.isRequired,
-//   owner: PropTypes.string.isRequired,
-//   selectBoard: PropTypes.func.isRequired,
-// };
-// export default Board;
