@@ -31,8 +31,8 @@ const Board = (props) => {
 //     </section>
 //     // Container for cards when board is selected? 
 
-//   );
-// };
+  );
+};
 
 Board.propTypes = {
 
