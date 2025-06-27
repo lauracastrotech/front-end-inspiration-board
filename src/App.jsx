@@ -27,6 +27,9 @@ function App() {
       axios.get(`${VITE_APP_BACKEND_URL}/${id}`)
         .then((response) => {
           setSelectedBoard(response.data);
+        })
+        .catch(() => {
+          console.log('Something went wrong.');
         });
       // <CardsList boardId={id}>? - the cards list only shows when a board is selected, right? if so then we can create another updater fundtion that has an id param
     };
