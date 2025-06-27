@@ -1,0 +1,141 @@
+.card_item {
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  max-width: 100%;
+}
+
+.card_item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.card_message {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  word-wrap: break-word;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.card_item_like {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #495057;
+}
+
+.card_item_like:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+  transform: scale(1.05);
+}
+
+.card_item_like:active {
+  transform: scale(0.98);
+}
+
+.card_item_like[aria-pressed="true"] {
+  background: #ff6b6b;
+  color: white;
+  border-color: #ff5252;
+}
+
+.like_count {
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+}
+
+.like_icon {
+  font-size: 16px;
+}
+
+.card_item_delete {
+  background: #dc3545;
+  color: white;
+  border: 1px solid #dc3545;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.card_item_delete:hover {
+  background: #c82333;
+  border-color: #bd2130;
+  transform: scale(1.05);
+}
+
+.card_item_delete:active {
+  transform: scale(0.98);
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .card_item {
+    padding: 12px;
+  }
+  
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+  
+  .card_item_like,
+  .card_item_delete {
+    justify-content: center;
+  }
+}
+
+/* Focus styles for accessibility */
+.card_item_like:focus,
+.card_item_delete:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .card_item {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .card_message {
+    color: #e2e8f0;
+  }
+  
+  .card_item_like {
+    background: #4a5568;
+    border-color: #718096;
+    color: #e2e8f0;
+  }
+  
+  .card_item_like:hover {
+    background: #718096;
+    border-color: #a0aec0;
+  }
+}
