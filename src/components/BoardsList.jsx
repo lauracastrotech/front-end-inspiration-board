@@ -26,6 +26,7 @@ const BoardsList = ({boards, selectedBoardData, selectBoard, showForm, createBoa
     return (
         <section>
             <h1>Boards</h1>
+            <button>New &#43;</button>
             {/* Placeholder to view selected board - */} 
             <ul>
                 {/*Conditional render based on isBoardFormVisible state*/}

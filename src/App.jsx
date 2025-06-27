@@ -9,7 +9,7 @@ const dummyBoardsData = [
     'board_id': 1,
     'title': 'inspiring board',
     'owner': 'Laura',
-    'cards': []
+    'cards': [{'card_id':1,'message': 'hello', 'likes_count': 2}]
   }
 ]
 function App() {
@@ -32,7 +32,7 @@ function App() {
     <>
       <h1>Inspiration Board</h1>
       <div id="flex-boards-list">
-        < BoardsList boards={boardsData} selectBoard={onBoardSelect} showForm={showBoardForm} createBoard={addNewBoard}/>
+        < BoardsList boards={boardsData} selectedBoardData={selectedBoard} selectBoard={onBoardSelect} showForm={showBoardForm} createBoard={addNewBoard}/>
       </div>
     </>
   )
