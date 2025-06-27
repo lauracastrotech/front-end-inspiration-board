@@ -1,9 +1,13 @@
 import Board from "./Board";
 import NewBoardForm from "./NewBoardForm";
+import BoardView from "./BoardView";
 
 
 // Container component that holds data about boards?
-const BoardsList = ({boards, selectBoard, showForm, createBoard}) => {
+const BoardsList = ({boards, selectedBoardData, selectBoard, showForm, setShowForm, createBoard}) => {
+    const addNewBoard = () => {
+        setShowForm(prevShowForm => !prevShowForm);
+    };
 
     const Boards = () => {
         return boards.map( board => {
@@ -25,12 +29,18 @@ const BoardsList = ({boards, selectBoard, showForm, createBoard}) => {
     return (
         <section>
             <h1>Boards</h1>
+            <button onClick={addNewBoard}>New &#43;</button>
             {/* Placeholder to view selected board - */} 
-            <ul>
-                {/*Conditional render based on isBoardFormVisible state*/}
-                {showForm && (<NewBoardForm onBoardSubmit={createBoard}/>)}
-                <Boards />
-            </ul>
+
+            <BoardView selectedBoardData={selectedBoardData}/>
+
+            <section>
+                <ul>
+                    {/*Conditional render based on isBoardFormVisible state*/}
+                    {showForm && (<NewBoardForm onBoardSubmit={createBoard}/>)}
+                    <Boards />
+                </ul>
+            </section>
         </section>
   );
 };
