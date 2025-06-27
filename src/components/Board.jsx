@@ -15,10 +15,27 @@ const Board = (props) => {
         onLikeCard={onLikeCard}
       />
     </main>
-  );
-};
+
+
+// const Board = ({id, title, owner, cards, selectBoard}) => {
+//     // add cards to props
+//     const handleBoardSelect = (e) => {
+//         e.preventDefault();
+//         selectBoard(1); //need to fix this
+//     };
+
+//     return (
+//     <section>
+//         <p>{title}&#58; <span>{owner}</span></p>
+//         <button onClick={handleBoardSelect}>Select</button>
+//     </section>
+//     // Container for cards when board is selected? 
+
+//   );
+// };
 
 Board.propTypes = {
+
   board: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -34,3 +51,10 @@ Board.propTypes = {
 };
 
 export default Board;
+
+//   id: PropTypes.number.isRequired,  
+//   title: PropTypes.string.isRequired,
+//   owner: PropTypes.string.isRequired,
+//   selectBoard: PropTypes.func.isRequired,
+// };
+// export default Board;
