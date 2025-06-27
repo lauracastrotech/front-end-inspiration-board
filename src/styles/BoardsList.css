@@ -1,0 +1,33 @@
+#all-boards {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+#all-boards > button {
+    padding: 10px 15px;
+    background-color: #36454F;
+    color: white;
+    border: none;
+    border-radius: 10px; 
+    cursor: pointer;
+    box-shadow: 2px 2px 1px rgba(255, 255, 255);
+} 
+
+#all-boards > button:focus { /* Accessibility keyboard focus */
+    outline: none;
+}
+
+#all-boards > button:focus-visible { /* Accessibility keyboard focus*/
+  outline: 2px solid #ffffff; 
+}
+
+.boards-section {
+    /* border: ivory 2px solid; */
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+#boards-list {
+    list-style-type: none;
+}

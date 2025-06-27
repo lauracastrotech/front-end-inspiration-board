@@ -1,0 +1,65 @@
+#board-form > section{
+    display: flex;
+    flex-flow: column wrap;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#board-form > section{
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background-color: #2a2f33;
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 1rem 0;
+}
+
+#board-form label {
+  color: rgba(255, 255, 255, 0.87);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+#board-form input[type="text"] {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.87);
+  color: #3d4b52;
+  font-size: 1rem;
+}
+
+#board-form input[type="text"]::placeholder {
+  color: #3d4b52;
+  opacity: .5;
+}
+
+#board-form input[type="text"]:focus {
+  outline: 2px solid #ffffff;
+}
+
+#board-form button {
+  padding: 10px 15px;
+  background-color: #36454F;
+  color: white;
+  border: none;
+  border-radius: 10px; 
+  cursor: pointer;
+  align-self: flex-start;
+  box-shadow: 2px 2px 1px rgba(255, 255, 255);
+}
+
+#board-form button:hover {
+  box-shadow: 2px 2px 1px rgba(255, 255, 255);
+  transition: box-shadow 0.2s ease;
+}
+
+#board-form button:focus {
+  outline: none;
+}
+
+#board-form button:focus-visible {
+  outline: 2px solid #ffffff;
+}
