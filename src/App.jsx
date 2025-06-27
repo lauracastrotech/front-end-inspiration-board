@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import Board from './components/Board';
 import NewBoardForm from './components/NewBoardForm';
+import BoardView from './components/BoardView';
 import axios from 'axios';
+import BoardsList from './components/BoardsList';
 
 const KBaseURL = import.meta.env.VITE_API_BASE_URL
 console.log('Base URL:', KBaseURL);
@@ -91,6 +93,7 @@ const App = () => {
   const [boardData, setBoardData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState(null);
   const [cardData, setCardData] = useState([]);
+  const [showForm, setShowForm] = useState(false)
 
   // Fetch all boards on mount
   const getAllBoards = () => {
@@ -109,6 +112,7 @@ const App = () => {
         setBoardData((boardData) => {
           return [...boardData, newBoard];
         });
+        setShowForm(prevShowForm => !prevShowForm);
       });
   };
 
@@ -157,28 +161,31 @@ const App = () => {
     <div className="app">
       <h1>Inspiration Board</h1>
       <div className="boards-list">
-        <h2>Boards</h2>
-        <ul>
-          {boardData.map(board => (
-            <li key={board.id}>
-              <button onClick={() => handleSelectBoard(board)}>
-                {board.title}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <BoardsList 
+          boards={boardData}
+          selectedBoard={selectedBoard}
+          cards={cardData}
+          onSelectBoard={handleSelectBoard}
+          onDeleteCard={deleteCard}
+          onLikeCard={likeCardHandler}
+          onPostCard={addCard}
+          showBoardForm={showForm}
+          onCreateBoard={addBoard}
+          addNewBoard={addBoard}
+        />
       </div>
-      {selectedBoard && (
+      {/* {selectedBoard && (
         <Board
           key={selectedBoard.id}
           board={selectedBoard}
           cards={cardData}
+          onSelect={handleSelectBoard}
           onDeleteCard={deleteCard}
           onLikeCard={likeCardHandler}
           onPostCard={addCard}
         />
-      )}
-      <NewBoardForm onCreateBoard={addBoard} />
+      )} */}
+
     </div>
   );
 };

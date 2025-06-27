@@ -4,21 +4,21 @@ import BoardView from "./BoardView";
 
 
 // Container component that holds data about boards?
-const BoardsList = ({boards, selectedBoardData, selectBoard, showForm, setShowForm, createBoard}) => {
-    const addNewBoard = () => {
-        setShowForm(prevShowForm => !prevShowForm);
-    };
+const BoardsList = ({boards, selectedBoard, onSelectBoard, onDeleteCard, onLikeCard, onPostCard, onCreateBoard, showBoardForm, addNewBoard}) => {
 
     const Boards = () => {
         return boards.map( board => {
             return (
-                <li key={board.board_id}>
+                <li key={board.id}>
                     <Board 
-                        id={board.board_id}
+                        id={board.id}
                         title={board.title} 
                         owner={board.owner} 
                         cards={board.cards}
-                        selectBoard={selectBoard}
+                        onSelectBoard={onSelectBoard}
+                        onDeleteCard={onDeleteCard}
+                        onLikeCard={onLikeCard}
+                        onPostCard={onPostCard}
                     />
                 </li>
 
@@ -32,12 +32,12 @@ const BoardsList = ({boards, selectedBoardData, selectBoard, showForm, setShowFo
             <button onClick={addNewBoard}>New &#43;</button>
             {/* Placeholder to view selected board - */} 
 
-            <BoardView selectedBoardData={selectedBoardData}/>
+            <BoardView viewingBoard={selectedBoard}/>
 
             <section>
                 <ul>
                     {/*Conditional render based on isBoardFormVisible state*/}
-                    {showForm && (<NewBoardForm onBoardSubmit={createBoard}/>)}
+                    {showBoardForm && (<NewBoardForm onBoardSubmit={onCreateBoard}/>)}
                     <Boards />
                 </ul>
             </section>
@@ -45,8 +45,8 @@ const BoardsList = ({boards, selectedBoardData, selectBoard, showForm, setShowFo
   );
 };
 
-BoardsList.propTypes = {
+// BoardsList.propTypes = {
   // add proptypes here
-};
+// };
 
 export default BoardsList;

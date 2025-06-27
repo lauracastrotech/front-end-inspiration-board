@@ -3,33 +3,19 @@ import CardList from './CardList';
 import NewCardForm from './NewCardForm';
 
 const Board = (props) => {
-  const { board, cards, onDeleteCard, onLikeCard, onPostCard } = props;
+  const { title, owner, id, cards, onDeleteCard, onLikeCard, onPostCard, onSelectBoard } = props;
 
-  return (
-    <main className="board">
-      <h1>{board.title}</h1>
-      <NewCardForm onPostCard={onPostCard} boardId={board.id} />
-      <CardList
-        cards={cards}
-        onDeleteCard={onDeleteCard}
-        onLikeCard={onLikeCard}
-      />
-    </main>
-
-
-// const Board = ({id, title, owner, cards, selectBoard}) => {
-//     // add cards to props
-//     const handleBoardSelect = (e) => {
-//         e.preventDefault();
-//         selectBoard(1); //need to fix this
-//     };
-
-//     return (
-//     <section>
-//         <p>{title}&#58; <span>{owner}</span></p>
-//         <button onClick={handleBoardSelect}>Select</button>
-//     </section>
-//     // Container for cards when board is selected? 
+    return (
+    <section>
+        <p>{title}&#58; <span>{owner}</span></p>
+        <button onClick={onSelectBoard}>Select</button>
+        {/* <NewCardForm onPostCard={onPostCard} boardId={id} />
+        <CardList
+          cards={cards}
+          onDeleteCard={onDeleteCard}
+          onLikeCard={onLikeCard}
+        /> */}
+    </section>
 
   );
 };
