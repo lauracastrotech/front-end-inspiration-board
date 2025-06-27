@@ -4,26 +4,6 @@ import './Card.css';
 // Card component to display a message and like count, 
 // with a button to like the message, and count how many times it has been liked, 
 // and a delete button to delete the card
-import axios from 'axios';
-
-const likeCard = (cardId) => {
-    return axios.put(`{BaseURL}/cards/{cardId}/likes`)
-    .then((response) => response.data)
-    .catch((error) => {
-        console.error('Error liking card:', error);
-        throw error;
-    }); 
-};
-
-const deleteCard = (cardId) => {
-    return axios.delete(`{BaseURL}/cards/${cardId}`)
-    .then((response) => { 
-        return response.data;
-    })
-    .catch((error) => {
-        console.error('Error deleting card:', error);
-    });
-};
 
 const Card = (props) => {
 

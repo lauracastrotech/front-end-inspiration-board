@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-// import './Board.css';
 import CardList from './CardList';
 import NewCardForm from './NewCardForm';
 

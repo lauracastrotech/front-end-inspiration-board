@@ -11,8 +11,7 @@ import './NewCardForm.css';
 const NewCardForm = ({ onPostCard, boardId }) => {
   const [formData, setFormData] = useState({
     message: '',
-    likesCount: 0,
-    boardId: boardId,
+    board_id: boardId,
   });
 
   const handleSubmit = (event) => {
@@ -21,8 +20,7 @@ const NewCardForm = ({ onPostCard, boardId }) => {
     onPostCard(formData);
     setFormData({
       message: '',
-      likesCount: 0,
-      boardId: boardId,
+      board_id: boardId,
     });
   };
 
@@ -45,9 +43,7 @@ const NewCardForm = ({ onPostCard, boardId }) => {
         value={formData.message}
         onChange={handleChange}
       />
-      <div className="message_preview">Preview
-        <span>{formData.message}</span>
-      </div>
+      <div className="message_preview">Preview: <span>{formData.message}</span></div>
       <button type="submit" className='add_card_button'>Submit</button>
     </form>
   )

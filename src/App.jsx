@@ -19,7 +19,7 @@ const convertFromApiBoard = (board) => {
 };
 
 const convertFromApiCard = (card) => {
-  const { card_id: cardId, message, likes_count: likesCount, board_id: boardId } = card;
+  const { id: cardId, message, likes_count: likesCount, board_id: boardId } = card;
   return { id: cardId, message, likesCount, boardId };
 };
 
@@ -47,6 +47,7 @@ const addNewBoardAPI = (newBoardData) => {
 const getCardsForBoardAPI = (boardId) => {
   return axios.get(`${KBaseURL}/boards/${boardId}/cards`)
     .then(response => {
+      console.log("Raw API response for cards:", response.data);
       return response.data.map(convertFromApiCard);
     })
     .catch(error => {
@@ -56,7 +57,8 @@ const getCardsForBoardAPI = (boardId) => {
 
 const addNewCardAPI = (newCardData) => {
   console.log("Posting new card:", newCardData);
-  return axios.post(`${KBaseURL}/boards/${newCardData.boardId}/cards`, newCardData)
+  console.log("API URL for new card:", `${KBaseURL}/boards/${newCardData.board_id}/cards`);
+  return axios.post(`${KBaseURL}/boards/${newCardData.board_id}/cards`, newCardData)
     .then((response) => {
       
       return convertFromApiCard(response.data);
@@ -74,9 +76,12 @@ const deleteCardAPI = (cardId) => {
     });
 };
 
-const likeCard = (cardId) => {
+const likeCardAPI = (cardId) => {
   return axios.put(`${KBaseURL}/cards/${cardId}/likes`)
-    .then(response => response.data)
+    .then(response => { 
+      console.log("Raw API response for liking card:", response.data); 
+      return convertFromApiCard(response.data); 
+    })
     .catch(error => {
       console.error('Error liking card:', error);
     });
@@ -126,7 +131,7 @@ const App = () => {
   };
 
   const likeCardHandler = (cardId) => {
-    return likeCard(cardId)
+    return likeCardAPI(cardId)
       .then((updatedCard) => {
         setCardData((cardData) => {
           return cardData.map(card => {
@@ -170,7 +175,6 @@ const App = () => {
           cards={cardData}
           onDeleteCard={deleteCard}
           onLikeCard={likeCardHandler}
-          onAddCard={addCard}
           onPostCard={addCard}
         />
       )}
