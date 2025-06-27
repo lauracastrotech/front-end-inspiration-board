@@ -2,19 +2,28 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 // import './NewBoardForm.css';        
 
+const KDefaultBoardState = {
+    title: '',
+    owner: '',
+    cards: []
+};
 const NewBoardForm = ({ onCreateBoard }) => {
-    const [boardName, setBoardName] = useState('');
-    
+    const [formData, setFormData] = useState(KDefaultBoardState);
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (boardName.trim()) {
-        onCreateBoard(boardName);
-        setBoardName('');
-        }
+
+        onCreateBoard(formData);
+        setFormData(KDefaultBoardState);
     };
     
     const handleChange = (event) => {
-        setBoardName(event.target.value);
+      const inputName = event.target.name;
+      const inputValue = event.target.value;
+      setFormData((formData) => ({
+        ...formData,
+        [inputName]: inputValue,
+        }));
     };
     
     return (
@@ -23,10 +32,17 @@ const NewBoardForm = ({ onCreateBoard }) => {
         <input
             type="text"
             id="board_name"
-            name="board_name"
-            value={boardName}
+            name="title"
+            value={formData.title}
             onChange={handleChange}
-            required
+        />
+        <label htmlFor="owner_name">Owner Name</label>
+        <input
+            type="text"
+            id="owner_name"
+            name="owner"
+            value={formData.owner}
+            onChange={handleChange}
         />
         <button type="submit" className='create_board_button'>Create Board</button>
         </form>
