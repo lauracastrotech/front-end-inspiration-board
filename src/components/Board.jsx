@@ -4,7 +4,7 @@ const Board = ({id, title, owner, cards, selectBoard}) => {
     // add cards to props
     const handleBoardSelect = (e) => {
         e.preventDefault();
-        selectBoard(1); //need to fix this
+        selectBoard(id); //need to fix this
     };
 
     return (
