@@ -5,16 +5,17 @@ import Card from './Card';
 // CardList component to display a list of cards,
 // each card contains a message, a like button, total likes and a delete button.
 
-const CardList = (props) => {
-  const getCardComponents = props.cards.map((card) => {
+const CardList = ({cards, onDeleteCard, onLikeCard}) => {
+
+  const getCardComponents = cards.map((card) => {
     return (
       <li key={card.id}>
         <Card
           id={card.id}
           message={card.message}
           likesCount={card.likesCount}
-          onLike={props.onLikeCard}
-          onDelete={props.onDeleteCard}
+          onLike={onLikeCard}
+          onDelete={onDeleteCard}
         />
       </li>
     );

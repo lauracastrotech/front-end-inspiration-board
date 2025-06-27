@@ -4,17 +4,20 @@ import NewCardForm from './NewCardForm';
 
 const Board = (props) => {
   const { title, owner, id, cards, onDeleteCard, onLikeCard, onPostCard, onSelectBoard } = props;
-
+    const selectBoard = () => {
+      console.log(id);
+      onSelectBoard(id);
+    };
     return (
     <section>
         <p>{title}&#58; <span>{owner}</span></p>
-        <button onClick={onSelectBoard}>Select</button>
-        {/* <NewCardForm onPostCard={onPostCard} boardId={id} />
+        <button onClick={selectBoard}>Select</button>
+        {/* <NewCardForm onPostCard={onPostCard} boardId={id} />*/}
         <CardList
           cards={cards}
           onDeleteCard={onDeleteCard}
           onLikeCard={onLikeCard}
-        /> */}
+        /> 
     </section>
 
   );

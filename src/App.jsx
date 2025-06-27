@@ -149,9 +149,20 @@ const App = () => {
       });
   };
 
+  const updateShowForm = () => {
+    setShowForm(!showForm);
+  };
+
   // Handle selecting a board and fetching its cards
-  const handleSelectBoard = (board) => {
-    setSelectedBoard(board);
+  const handleSelectBoard = (id) => {
+    const board = axios.get(`${KBaseURL}/boards/${id}`)
+      .then(response => {
+        setSelectedBoard(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching boards:', error);
+      });
+
     getCardsForBoardAPI(board.id).then((cards) => {
       setCardData(cards);
     });
@@ -164,13 +175,13 @@ const App = () => {
         <BoardsList 
           boards={boardData}
           selectedBoard={selectedBoard}
-          cards={cardData}
+          cardState={cardData}
           onSelectBoard={handleSelectBoard}
           onDeleteCard={deleteCard}
           onLikeCard={likeCardHandler}
           onPostCard={addCard}
           showBoardForm={showForm}
-          onCreateBoard={addBoard}
+          updateShowForm={updateShowForm}
           addNewBoard={addBoard}
         />
       </div>

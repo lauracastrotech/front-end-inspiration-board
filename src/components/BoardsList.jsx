@@ -4,7 +4,7 @@ import BoardView from "./BoardView";
 
 
 // Container component that holds data about boards?
-const BoardsList = ({boards, selectedBoard, onSelectBoard, onDeleteCard, onLikeCard, onPostCard, onCreateBoard, showBoardForm, addNewBoard}) => {
+const BoardsList = ({boards, cardState, updateShowForm, selectedBoard, onSelectBoard, onDeleteCard, onLikeCard, onPostCard, showBoardForm, addNewBoard}) => {
 
     const Boards = () => {
         return boards.map( board => {
@@ -29,15 +29,15 @@ const BoardsList = ({boards, selectedBoard, onSelectBoard, onDeleteCard, onLikeC
     return (
         <section>
             <h1>Boards</h1>
-            <button onClick={addNewBoard}>New &#43;</button>
+            <button onClick={updateShowForm}>New &#43;</button>
             {/* Placeholder to view selected board - */} 
 
-            <BoardView viewingBoard={selectedBoard}/>
+            <BoardView viewBoard={selectedBoard}/>
 
             <section>
                 <ul>
                     {/*Conditional render based on isBoardFormVisible state*/}
-                    {showBoardForm && (<NewBoardForm onBoardSubmit={onCreateBoard}/>)}
+                    {showBoardForm && (<NewBoardForm onBoardSubmit={addNewBoard}/>)}
                     <Boards />
                 </ul>
             </section>
