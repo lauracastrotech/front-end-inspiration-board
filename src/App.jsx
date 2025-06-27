@@ -10,11 +10,17 @@ const dummyBoardsData = [
     'title': 'inspiring board',
     'owner': 'Laura',
     'cards': [{'card_id':1,'message': 'hello', 'likes_count': 2}]
-  }
+  },
+  {
+    'board_id': 2,
+    'title': 'amazing board',
+    'owner': 'Wendy',
+    'cards': [{'card_id':1,'message': 'bye', 'likes_count': 0}]
+  },
 ]
 function App() {
     const [boardsData, setBoardsData] = useState(dummyBoardsData);
-    const [selectedBoard, setSelectedBoard] = useState({});
+    const [selectedBoard, setSelectedBoard] = useState(dummyBoardsData);
     const [showBoardForm, setShowBoardForm] = useState(false);
 
     const onBoardSelect = (id) => {
@@ -22,8 +28,6 @@ function App() {
         .then((response) => {
           setSelectedBoard(response.data);
         });
-      // get board by id
-      // update selectedBoard state
       // <CardsList boardId={id}>? - the cards list only shows when a board is selected, right? if so then we can create another updater fundtion that has an id param
     };
     const addNewBoard = () => {};
@@ -32,10 +36,10 @@ function App() {
     <>
       <h1>Inspiration Board</h1>
       <div id="flex-boards-list">
-        < BoardsList boards={boardsData} selectedBoardData={selectedBoard} selectBoard={onBoardSelect} showForm={showBoardForm} createBoard={addNewBoard}/>
+        < BoardsList boards={boardsData} selectedBoardData={selectedBoard} selectBoard={onBoardSelect} showForm={showBoardForm} setShowForm={setShowBoardForm} createBoard={addNewBoard}/>
       </div>
     </>
   )
 }
 
-export default App
+export default App;
