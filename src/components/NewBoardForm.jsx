@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PropTypes from 'prop-types';
+import "../styles/NewBoardForm.css";
 
 const kDefaultFormState = {
     'title': '',
@@ -20,14 +21,15 @@ const NewBoardForm = ({onBoardSubmit}) => {
     };
     
   return (
-    <form onSubmit={handleSubmit}>
+    <form id="board-form" onSubmit={handleSubmit}>
         <section>
             <label htmlFor="title">Title</label>
             <input 
             onChange={handleChange}
             type="text"
             name="title"
-            value={formData.title} />
+            value={formData.title}
+            placeholder="What inspires you?" />
 
             <label htmlFor="owner">Owner</label>
             <input 

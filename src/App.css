@@ -1,9 +1,18 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
 }
 
-h1 {
+/* Layout Styles */
+#app {
+  display: flex;
+  flex-direction: column;
+}
+
+#app > h1 {
   text-align: center;
+  margin: 0.5rem;
+  /* border: aquamarine 2px solid; */
+  border-bottom: 2px solid #36454F;
 }

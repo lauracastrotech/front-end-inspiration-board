@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import '../styles/Board.css';
 
 const Board = ({id, title, owner, cards, selectBoard}) => {
     // add cards to props
@@ -8,10 +9,11 @@ const Board = ({id, title, owner, cards, selectBoard}) => {
     };
 
     return (
-    <section>
-        <p>{title}&#58; <span>{owner}</span></p>
-        <button onClick={handleBoardSelect}>Select</button>
-    </section>
+      <section>
+          <h3>{title}</h3>
+          <button onClick={handleBoardSelect}>View</button>
+          <span>Created by {owner}</span>
+      </section>
     // Container for cards when board is selected? 
   );
 };

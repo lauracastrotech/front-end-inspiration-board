@@ -36,13 +36,11 @@ function App() {
     const addNewBoard = () => {};
 
   return (
-    <>
+    <main id='app'>
       <h1>Inspiration Board</h1>
-      <div id="flex-boards-list">
-        < BoardsList boards={boardsData} selectedBoardData={selectedBoard} selectBoard={onBoardSelect} showForm={showBoardForm} setShowForm={setShowBoardForm} createBoard={addNewBoard}/>
-      </div>
-    </>
-  )
-}
+      <BoardsList boards={boardsData} selectedBoardData={selectedBoard} selectBoard={onBoardSelect} showForm={showBoardForm} setShowForm={setShowBoardForm} createBoard={addNewBoard}/>
+    </main>
+  );
+};
 
 export default App;
