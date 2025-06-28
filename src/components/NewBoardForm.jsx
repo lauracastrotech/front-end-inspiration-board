@@ -8,10 +8,25 @@ const KDefaultBoardState = {
 };
 const NewBoardForm = ({ onCreateBoard }) => {
     const [formData, setFormData] = useState(KDefaultBoardState);
+    const [errorData, setErrorData] = useState('');
+
+    const validateInput = (title, owner) => {
+        if (!title || !owner) {
+            return 'All fields are required';
+        }
+        return '';
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        const error = validateInput(formData.title, formData.owner);
+        if (error) {
+            setErrorData(error);
+            return;
+        }
+
+        setErrorData('');
         onCreateBoard(formData);
         setFormData(KDefaultBoardState);
     };
@@ -34,6 +49,7 @@ const NewBoardForm = ({ onCreateBoard }) => {
             name="title"
             value={formData.title}
             onChange={handleChange}
+            className={errorData ? 'error' : ''}
         />
         <label htmlFor="owner_name">Owner Name</label>
         <input
@@ -42,7 +58,9 @@ const NewBoardForm = ({ onCreateBoard }) => {
             name="owner"
             value={formData.owner}
             onChange={handleChange}
+            className={errorData ? 'error' : ''}
         />
+        {errorData && <p className="error_message">{errorData}</p>}
         <button type="submit" className='create_board_button'>Create Board</button>
         </form>
     );
