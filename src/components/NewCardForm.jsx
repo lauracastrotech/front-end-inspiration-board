@@ -13,10 +13,28 @@ const NewCardForm = ({ onPostCard, boardId }) => {
     message: '',
     board_id: boardId,
   });
+  const [errorData, setErrorData] = useState('');
+
+  const validateMessage = (message) => {
+    if (message.trim() === '') {
+      return 'Message cannot be empty';
+    }
+    if (message.length > 40) {
+      return 'Message cannot exceed 40 characters';
+    }
+    return '';
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
+    const error = validateMessage(formData.message);
+    if (error) {
+      setErrorData(error);
+      return;
+    }
+
+    setErrorData('');
     onPostCard(formData);
     setFormData({
       message: '',
@@ -42,7 +60,9 @@ const NewCardForm = ({ onPostCard, boardId }) => {
         name="message"
         value={formData.message}
         onChange={handleChange}
+        className={errorData ? 'error' : ''}
       />
+      {errorData && <div className="error_message">{errorData}</div>}
       <div className="message_preview">Preview: <span>{formData.message}</span></div>
       <button type="submit" className='add_card_button'>Submit</button>
     </form>
