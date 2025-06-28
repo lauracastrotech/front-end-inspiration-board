@@ -1,212 +1,180 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import Board from './components/Board';
-import NewBoardForm from './components/NewBoardForm';
-import BoardView from './components/BoardView';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import BoardsList from './components/BoardsList';
-
-const KBaseURL = import.meta.env.VITE_API_BASE_URL;
-
-// Main App component:
-// - Fetches boards from the backend (GET request)
-// - Allows creating a new board (POST request)
-// - Lets users select a board to display its cards
-// - Supports deleting and liking cards, and counting card likes
-
-const convertFromApiBoard = (board) => {
-  const { id: boardId, title, owner, cards } = board;
-  return { id: boardId, title, owner, cards };
-};
-
-const convertFromApiCard = (card) => {
-  const { id: cardId, message, likes_count: likesCount, board_id: boardId } = card;
-  return { id: cardId, message, likesCount, boardId };
-};
-
-const getAllBoardsFromAPI = () => {
-  return axios.get(`${KBaseURL}/boards`)
-    .then(response => {
-      return response.data.map(convertFromApiBoard);
-    })
-    .catch(error => {
-      console.error('Error fetching boards:', error);
-    });
-};
-
-const addNewBoardAPI = (newBoardData) => {
-  return axios.post(`${KBaseURL}/boards`, newBoardData)
-    .then(response => {
-      console.log("Raw API response for new board:", response.data);
-      return convertFromApiBoard(response.data);
-    })
-    .catch(error => {
-      console.error('Error adding new board:', error);
-    });
-};
-
-const getCardsForBoardAPI = (boardId) => {
-  return axios.get(`${KBaseURL}/boards/${boardId}/cards`)
-    .then(response => {
-      console.log("Raw API response for cards:", response.data);
-      return response.data.map(convertFromApiCard);
-    })
-    .catch(error => {
-      console.error('Error fetching cards for board:', error);
-    });
-};
-
-const addNewCardAPI = (newCardData) => {
-  console.log("Posting new card:", newCardData);
-  console.log("API URL for new card:", `${KBaseURL}/boards/${newCardData.board_id}/cards`);
-  return axios.post(`${KBaseURL}/boards/${newCardData.board_id}/cards`, newCardData)
-    .then((response) => {
-      
-      return convertFromApiCard(response.data);
-    })
-    .catch((error) => {
-        console.error('Error adding new card:', error);
-    });
-};
-
-const deleteCardAPI = (cardId) => {
-  return axios.delete(`${KBaseURL}/cards/${cardId}`)
-    .then(response => response.data)
-    .catch(error => {
-      console.error('Error deleting card:', error);
-    });
-};
-
-const likeCardAPI = (cardId) => {
-  return axios.put(`${KBaseURL}/cards/${cardId}/likes`)
-    .then(response => { 
-      console.log("Raw API response for liking card:", response.data); 
-      return convertFromApiCard(response.data); 
-    })
-    .catch(error => {
-      console.error('Error liking card:', error);
-    });
-};
-
-// const dummyBoard = {
-//   'id': 2,
-//   'title':'help',
-//   'owner':'us',
-// };
-// const dummycards= [
-//     {
-//       "board_id": 1,
-//       "id": 3,
-//       "likes_count": 0,
-//       "message": "hello"
-//     },
-//     {
-//       "board_id": 1,
-//       "id": 4,
-//       "likes_count": 0,
-//       "message": "hello"
-//     }
-//   ];
-
+import CardList from './components/CardList.jsx';
+import NewCardForm from './components/NewCardForm.jsx';
+import NewBoardForm from './components/NewBoardForm.jsx';
+import Board from './components/Board.jsx';
 
 const App = () => {
-  const [boardData, setBoardData] = useState([]); // all boards
+  const [boards, setBoards] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState(null);
-  const [cardData, setCardData] = useState([]); // all cards
-  const [showForm, setShowForm] = useState(false); // board form
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showAddBoardForm, setShowAddBoardForm] = useState(false);
+  const baseURL = 'http://127.0.0.1:5000';
 
-  // Fetch all boards on mount
-  const getAllBoards = () => {
-    getAllBoardsFromAPI()
-      .then((boards) => {
-        setBoardData(boards);
-      });
-  };
+  // Fetch all boards on initial load
   useEffect(() => {
-    const response = getAllBoards();
-    console.log('this is the response:', response);
-
-    // this returns undefined
+    axios.get(`${baseURL}/boards`)
+      .then((response) => {
+        setBoards(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+        setErrorMessage(<p className="text_error">Error loading boards.</p>);
+      });
   }, []);
 
-  const addBoard = (newBoardData) => {
-    return addNewBoardAPI(newBoardData)
-      .then((newBoard) => {
-        setBoardData((boardData) => {
-          return [...boardData, newBoard];
-        });
-        setShowForm(prevShowForm => !prevShowForm);
+
+  const handleBoardSelect = (board) => {
+    console.log("Fetching cards for board ID:", board.board_id);
+    setErrorMessage('');
+    // Fetch cards for this board:
+    axios.get(`${baseURL}/boards/${board.board_id}/cards`)
+      .then((response) => {
+        // Updates the State with all the fresh Cards details just received from the backend
+        setSelectedBoard(response.data);
+        // Hides the Board_form
+        setShowAddBoardForm(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setErrorMessage(<p className="text_error">Error loading boards.</p>);
+        setSelectedBoard(null);
       });
   };
 
-  const addCard = (newCardData) => {
-    return addNewCardAPI(newCardData)
-      .then((newCard) => {
-        setCardData((cardData) => {
-          return [...cardData, newCard];
-        });
+  const addBoard = (newBoardData) => {
+    setErrorMessage('');
+    axios.post(`${baseURL}/boards`, newBoardData)
+      .then((response) => {
+        const newlyCreatedBoard = response.data.board;
+        setBoards((prevBoards) => [newlyCreatedBoard, ...prevBoards]);
+        setSelectedBoard(newlyCreatedBoard);
+        setShowAddBoardForm(false);
+      })
+      .catch((error) => {
+        console.error("Error creating board:", error);
+        setErrorMessage(<p className="text_error">Error loading boards.</p>);
       });
   };
+
+
+  // Adds a new card to selected board
+  const addCard = (boardId, newCard) => {
+    axios.post(`${baseURL}/boards/${boardId}/cards`, newCard)
+      .then((response) => {
+        const newCard = response.data.card;
+        setSelectedBoard((prevBoard) => {
+          if (!prevBoard) return null;
+          return {
+            ...prevBoard,
+            cards: [...(prevBoard.cards || []), newCard],
+          };
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        setErrorMessage(<p className="text_error">Error loading boards.</p>);
+      });
+  };
+
+  const deleteBoard = (boardId) => {
+    setErrorMessage('');
+    axios.delete(`${baseURL}/boards/${boardId}`)
+      .then(() => {
+        setBoards((prevBoards) => prevBoards.filter((board) => board.board_id !== boardId));
+        if (selectedBoard && selectedBoard.board_id === boardId) {
+          setSelectedBoard(null);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setErrorMessage(<p className="text_error">Error loading boards.</p>);
+      });
+  };
+
 
   const deleteCard = (cardId) => {
-    return deleteCardAPI(cardId)
+    setErrorMessage('');
+    axios.delete(`${baseURL}/cards/${cardId}`)
       .then(() => {
-        setCardData((cardData) => {
-          return cardData.filter(card => card.id !== cardId);
+        setSelectedBoard((prevBoard) => {
+          if (!prevBoard) return null;
+          return {
+            ...prevBoard,
+            cards: (prevBoard.cards || []).filter((card) => card.card_id !== cardId),
+          };
         });
-      });
-  };
-
-  const likeCardHandler = (cardId) => {
-    return likeCardAPI(cardId)
-      .then((updatedCard) => {
-        setCardData((cardData) => {
-          return cardData.map(card => {
-            if (card.id === cardId) {
-              return { ...card, likesCount: updatedCard.likesCount };
-            } else {
-              return card;
-            }
-          });
-        });
-      });
-  };
-
-  const updateShowForm = () => {
-    setShowForm(!showForm);
-  };
-
-  // Handle selecting a board and fetching its cards
-  const handleSelectBoard = (id) => {
-    axios.get(`${KBaseURL}/boards/${id}`)
-      .then(response => {
-        console.log(response);
-        setSelectedBoard(response.data);
-        getCardsForBoardAPI(response.data.id).then((cards) => {
-        setCardData(cards);
       })
-      .catch(error => {
-        console.error('Error fetching boards:', error);
+      .catch((error) => {
+        console.error("Error deleting card:", error);
+        setErrorMessage(<p className="text_error">Error loading boards.</p>);
       });
-    });
   };
 
-  return (
-    <div className="app">
+return (
+    <div className="bigbox">
       <h1>Inspiration Board</h1>
-      <div className="boards-list">
-        <BoardsList 
-          boards={boardData}
-          selectedBoard={selectedBoard}
-          cardDataState={cardData}
-          onSelectBoard={handleSelectBoard}
-          onDeleteCard={deleteCard}
-          onLikeCard={likeCardHandler}
-          onPostCard={addCard}
-          showBoardForm={showForm}
-          updateShowForm={updateShowForm}
-          addNewBoard={addBoard}
-        />
+      {errorMessage}
+
+      <button
+        onClick={() => setShowAddBoardForm(true)}
+        className="button1"
+      >
+        ➕ Add New Board
+      </button>
+
+      <div>
+        <h2>Your Boards</h2>
+        <div>
+          {showAddBoardForm && (
+            <div>
+              <NewBoardForm onBoardSubmit={addBoard} />
+            </div>
+          )}
+          {boards.length === 0 && !showAddBoardForm ? (
+            <p >No boards available. Click "Add New Board"</p>
+          ) : (
+            boards.map((board) => {
+              if (selectedBoard && selectedBoard.board_id === board.board_id) {
+                return (
+                  <Board
+                    key={board.board_id}
+                    board={selectedBoard}
+                    onDeleteBoard={deleteBoard}
+                    onAddCard={addCard}
+                    onDeleteCard={deleteCard}
+                  />
+                );
+              } else {
+                return (
+                  <div
+                    key={board.board_id}
+                    className={`board-item
+                    ${selectedBoard && selectedBoard.board_id === board.board_id ? 'bg' : 'bg-gray'}
+                    `}
+                  >
+                    <div onClick={() => handleBoardSelect(board)}>
+                      <h3>{board.title}</h3>
+                      <p>Owner: {board.owner}</p>
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deleteBoard(board.board_id);
+                      }}
+                      aria-label={`Delete board ${board.title}`}
+                      className="ml-4"
+                      title="Delete board"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                );
+              }
+            })
+          )}
+        </div>
       </div>
     </div>
   );
