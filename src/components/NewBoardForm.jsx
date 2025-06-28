@@ -39,29 +39,34 @@ const NewBoardForm = ({ onCreateBoard }) => {
         [inputName]: inputValue,
         }));
     };
-    
+
+    const makeControlledInput = (inputName) => {
+      return <input 
+        onChange={handleChange} 
+        type='text' 
+        id={`input-${inputName}`}
+        name={inputName}
+        value={formData[inputName]}
+        className={errorData ? 'error' : ''}
+      />;
+  };
+
     return (
         <form className="new_board_form" onSubmit={handleSubmit}>
-        <label htmlFor="board_name">Board Name</label>
-        <input
-            type="text"
-            id="board_name"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            className={errorData ? 'error' : ''}
-        />
-        <label htmlFor="owner_name">Owner Name</label>
-        <input
-            type="text"
-            id="owner_name"
-            name="owner"
-            value={formData.owner}
-            onChange={handleChange}
-            className={errorData ? 'error' : ''}
-        />
-        {errorData && <p className="error_message">{errorData}</p>}
-        <button type="submit" className='create_board_button'>Create Board</button>
+            <div>
+                <label htmlFor="board_name">Board Name</label>
+                { makeControlledInput('title') }
+            </div>
+            <div>
+                <label htmlFor="owner_name">Owner Name</label>
+                { makeControlledInput('owner') }
+            </div>  
+                { errorData && 
+                    <div> 
+                        <p className="error_message">{errorData}</p> 
+                    </div> 
+                }
+            <button type="submit" className='create_board_button'>Create Board</button>
         </form>
     );
 };
