@@ -36,7 +36,7 @@ const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSel
             <section>
                 <ul>
                     {/*Conditional render based on isBoardFormVisible state*/}
-                    {showBoardForm && (<NewBoardForm onBoardSubmit={addNewBoard}/>)}
+                    {showBoardForm && (<NewBoardForm onCreateBoard={addNewBoard}/>)}
                     <Boards />
                 </ul>
             </section>
