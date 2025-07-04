@@ -139,6 +139,7 @@ const App = () => {
                   <Board
                     key={board.board_id}
                     board={selectedBoard}
+                    onDeleteBoard={deleteBoard}
                     onAddCard={addCard}
                     onDeleteCard={deleteCard}
                   />
