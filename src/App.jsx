@@ -12,7 +12,6 @@ const App = () => {
   const [showAddBoardForm, setShowAddBoardForm] = useState(false);
   const baseURL = 'http://127.0.0.1:5000';
 
-  // Fetch all boards on initial load
   useEffect(() => {
     axios.get(`${baseURL}/boards`)
       .then((response) => {
@@ -24,16 +23,11 @@ const App = () => {
       });
   }, []);
 
-
   const handleBoardSelect = (board) => {
-    console.log("Fetching cards for board ID:", board.board_id);
     setErrorMessage('');
-    // Fetch cards for this board:
     axios.get(`${baseURL}/boards/${board.board_id}/cards`)
       .then((response) => {
-        // Updates the State with all the fresh Cards details just received from the backend
         setSelectedBoard(response.data);
-        // Hides the Board_form
         setShowAddBoardForm(false);
       })
       .catch((error) => {
@@ -58,8 +52,6 @@ const App = () => {
       });
   };
 
-
-  // Adds a new card to selected board
   const addCard = (boardId, newCard) => {
     axios.post(`${baseURL}/boards/${boardId}/cards`, newCard)
       .then((response) => {
@@ -93,7 +85,6 @@ const App = () => {
       });
   };
 
-
   const deleteCard = (cardId) => {
     setErrorMessage('');
     axios.delete(`${baseURL}/cards/${cardId}`)
@@ -112,28 +103,35 @@ const App = () => {
       });
   };
 
-return (
-    <div className="bigbox">
-      <h1>Inspiration Board</h1>
+  return (
+    <div className="app-container">
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+
+      <h1 className="app-title">Inspiration Board</h1>
       {errorMessage}
 
       <button
         onClick={() => setShowAddBoardForm(true)}
-        className="button1"
+        className="add-board-button"
       >
         ➕ Add New Board
       </button>
 
-      <div>
-        <h2>Your Boards</h2>
-        <div>
+      <div className="boards-container">
+        <h2 className="boards-heading">Your Boards</h2>
+        <div className="boards-grid">
           {showAddBoardForm && (
-            <div>
+            <div className="board-item">
               <NewBoardForm onBoardSubmit={addBoard} />
             </div>
           )}
           {boards.length === 0 && !showAddBoardForm ? (
-            <p >No boards available. Click "Add New Board"</p>
+            <p className="no-boards-text">
+              No boards available. Click "Add New Board" to create one!
+            </p>
           ) : (
             boards.map((board) => {
               if (selectedBoard && selectedBoard.board_id === board.board_id) {
@@ -149,13 +147,12 @@ return (
                 return (
                   <div
                     key={board.board_id}
-                    className={`board-item
-                    ${selectedBoard && selectedBoard.board_id === board.board_id ? 'bg' : 'bg-gray'}
-                    `}
+                    className={`board-item ${selectedBoard && selectedBoard.board_id === board.board_id ? 'board-item-selected' : ''}`}
+                    onClick={() => handleBoardSelect(board)}
                   >
-                    <div onClick={() => handleBoardSelect(board)}>
-                      <h3>{board.title}</h3>
-                      <p>Owner: {board.owner}</p>
+                    <div className="board-content">
+                      <h3 className="board-title">{board.title}</h3>
+                      <p className="board-owner">Owner: {board.owner}</p>
                     </div>
                     <button
                       onClick={(e) => {
@@ -163,7 +160,7 @@ return (
                         deleteBoard(board.board_id);
                       }}
                       aria-label={`Delete board ${board.title}`}
-                      className="ml-4"
+                      className="delete-board-button"
                       title="Delete board"
                     >
                       &times;
