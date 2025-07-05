@@ -5,7 +5,6 @@ import "../styles/BoardsList.css";
 import '../styles/Board.css';
 import '../styles/NewBoardForm.css';
 
-// Container component that holds data about boards?
 const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSelectBoard, onDeleteCard, onLikeCard, onPostCard, showBoardForm, addNewBoard}) => {
 
     const Boards = () => {
@@ -20,6 +19,7 @@ const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSel
                         onDeleteCard={onDeleteCard}
                         onLikeCard={onLikeCard}
                         onPostCard={onPostCard}
+                        cardDataState={cardDataState}
                     />
                 </li>
 
@@ -31,17 +31,17 @@ const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSel
         <div>
             <section id="all-boards" className="boards-section">
                 <h1>Boards</h1>
-                <button onClick={addNewBoard} id="new-btn">New</button>
+                <button onClick={updateShowForm} id="new-btn">New</button>
             </section>
 
-            {/* <section className="boards-section"> */}
+            <section className="boards-section">
                 {/* Placeholder to view selected board - */} 
-                {/* <BoardView selectedBoardData={selectedBoardData}/> */}
-            {/* </section> */}
+                <BoardView selectedBoard={selectedBoard}/>
+            </section>
 
             <section className="boards-section">
                 {/*Conditional render based on isBoardFormVisible state*/}
-                {showForm && (<NewBoardForm onBoardSubmit={createBoard}/>)}
+                {showBoardForm && (<NewBoardForm onBoardSubmit={addNewBoard}/>)}
                 <ul id="boards-list">
                     <Boards />
                 </ul>

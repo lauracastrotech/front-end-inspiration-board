@@ -8,12 +8,6 @@ import BoardsList from './components/BoardsList';
 
 const KBaseURL = import.meta.env.VITE_API_BASE_URL;
 
-// Main App component:
-// - Fetches boards from the backend (GET request)
-// - Allows creating a new board (POST request)
-// - Lets users select a board to display its cards
-// - Supports deleting and liking cards, and counting card likes
-
 const convertFromApiBoard = (board) => {
   const { id: boardId, title, owner, cards } = board;
   return { id: boardId, title, owner, cards };
@@ -87,27 +81,6 @@ const likeCardAPI = (cardId) => {
       console.error('Error liking card:', error);
     });
 };
-
-// const dummyBoard = {
-//   'id': 2,
-//   'title':'help',
-//   'owner':'us',
-// };
-// const dummycards= [
-//     {
-//       "board_id": 1,
-//       "id": 3,
-//       "likes_count": 0,
-//       "message": "hello"
-//     },
-//     {
-//       "board_id": 1,
-//       "id": 4,
-//       "likes_count": 0,
-//       "message": "hello"
-//     }
-//   ];
-
 
 const App = () => {
   const [boardData, setBoardData] = useState([]); // all boards

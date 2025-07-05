@@ -1,11 +1,11 @@
-#board-form > section{
+.board-section {
     display: flex;
     flex-flow: column wrap;
     margin-bottom: 20px;
     padding: 10px;
 }
 
-#board-form > section{
+.board-section {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -22,7 +22,7 @@
   margin-bottom: 0.25rem;
 }
 
-#board-form input[type="text"] {
+.input-style input[type="text"] {
   padding: 8px 10px;
   border: none;
   border-radius: 8px;
@@ -31,16 +31,16 @@
   font-size: 1rem;
 }
 
-#board-form input[type="text"]::placeholder {
+.input-style input[type="text"]::placeholder {
   color: #3d4b52;
   opacity: .5;
 }
 
-#board-form input[type="text"]:focus {
+.input-style input[type="text"]:focus {
   outline: 2px solid #ffffff;
 }
 
-#board-form button {
+.create_board_button {
   padding: 10px 15px;
   background-color: #36454F;
   color: white;
@@ -51,15 +51,15 @@
   box-shadow: 2px 2px 1px rgba(255, 255, 255);
 }
 
-#board-form button:hover {
+.create_board_button:hover {
   box-shadow: 2px 2px 1px rgba(255, 255, 255);
   transition: box-shadow 0.2s ease;
 }
 
-#board-form button:focus {
+.create_board_button:focus {
   outline: none;
 }
 
-#board-form button:focus-visible {
+.create_board_button:focus-visible {
   outline: 2px solid #ffffff;
 }
