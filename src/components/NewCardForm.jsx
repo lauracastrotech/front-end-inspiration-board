@@ -1,42 +1,75 @@
-import { useState } from "react";
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import './NewCardForm.css';
 
-const kDefaultFormState = {
-    'message': '',
-    'likes_count': 0
-};
+// NewCardForm component to create a new card with a message
+// and a button to submit the form, which calls the onSubmit prop with the message
+// Preview of the card as shown below the input when typing in the input field
 
-const NewCardForm = ({onBoardSubmit}) => {
-    const [formData, setFormData] = useState(kDefaultFormState);
-  
-    const handleChange = (e) => {
-          e.preventDefault();
-          setFormData(formData => {
-              return {...formData, [e.target.name]: e.target.value};
-          });
-      };
 
-    const handleSubmit = (e) => {
-          e.preventDefault();
-          onBoardSubmit();
-      };
+
+const NewCardForm = ({ onPostCard, boardId }) => {
+  const [formData, setFormData] = useState({
+    message: '',
+    board_id: boardId,
+  });
+  const [errorData, setErrorData] = useState('');
+
+  const validateMessage = (message) => {
+    if (message.trim() === '') {
+      return 'Message cannot be empty';
+    }
+    if (message.length > 40) {
+      return 'Message cannot exceed 40 characters';
+    }
+    return '';
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const error = validateMessage(formData.message);
+    if (error) {
+      setErrorData(error);
+      return;
+    }
+
+    setErrorData('');
+    onPostCard(formData);
+    setFormData({
+      message: '',
+      board_id: boardId,
+    });
+  };
+
+  const handleChange = (event) => {
+    const inputName = event.target.name;
+    const inputValue = event.target.value;
+    setFormData((formData) => ({
+      ...formData,
+      [inputName]: inputValue,
+    }));
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-        <section>
-            <label htmlFor="message">Message</label>
-            <textarea
-            onChange={handleChange}
-            rows='10'
-            cols='50'
-            type="text"
-            name="message"
-            placeholder="What inspired you today?"
-            value={formData.message}></textarea>
-
-            <button type="submit">Add</button>
-        </section>
+    <form className="new_card_form" onSubmit={handleSubmit}>
+      <label htmlFor="message">Message</label>
+      <input
+        type="text"
+        id="message"
+        name="message"
+        value={formData.message}
+        onChange={handleChange}
+        className={errorData ? 'error' : ''}
+      />
+      {errorData && <div className="error_message">{errorData}</div>}
+      <div className="message_preview">Preview: <span>{formData.message}</span></div>
+      <button type="submit" className='add_card_button'>Submit</button>
     </form>
-  );
+  )
 };
 
+NewCardForm.propTypes = {
+  onPostCard: PropTypes.func.isRequired,
+};
 export default NewCardForm;

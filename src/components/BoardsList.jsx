@@ -6,21 +6,20 @@ import '../styles/Board.css';
 import '../styles/NewBoardForm.css';
 
 // Container component that holds data about boards?
-const BoardsList = ({boards, selectedBoardData, selectBoard, showForm, setShowForm, createBoard}) => {
-    const addNewBoard = () => {
-        setShowForm(prevShowForm => !prevShowForm);
-    };
+const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSelectBoard, onDeleteCard, onLikeCard, onPostCard, showBoardForm, addNewBoard}) => {
 
     const Boards = () => {
         return boards.map( board => {
             return (
-                <li key={board.board_id} className="board">
+                <li key={board.id} className="board">
                     <Board 
-                        id={board.board_id}
+                        id={board.id}
                         title={board.title} 
                         owner={board.owner} 
-                        cards={board.cards}
-                        selectBoard={selectBoard}
+                        onSelectBoard={onSelectBoard}
+                        onDeleteCard={onDeleteCard}
+                        onLikeCard={onLikeCard}
+                        onPostCard={onPostCard}
                     />
                 </li>
 
@@ -52,8 +51,8 @@ const BoardsList = ({boards, selectedBoardData, selectBoard, showForm, setShowFo
   );
 };
 
-BoardsList.propTypes = {
+// BoardsList.propTypes = {
   // add proptypes here
-};
+// };
 
 export default BoardsList;
