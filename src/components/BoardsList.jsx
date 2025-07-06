@@ -35,13 +35,15 @@ const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSel
             </section>
 
             <section className="boards-section">
-                {/* Placeholder to view selected board - */} 
                 <BoardView selectedBoard={selectedBoard}/>
             </section>
 
             <section className="boards-section">
-                {/*Conditional render based on isBoardFormVisible state*/}
-                {showBoardForm && (<NewBoardForm onBoardSubmit={addNewBoard}/>)}
+                    {showBoardForm && (
+                        <div id="show-form-bg">
+                            <NewBoardForm onBoardSubmit={addNewBoard}/>
+                        </div>
+                    )}
                 <ul id="boards-list">
                     <Boards />
                 </ul>

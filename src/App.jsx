@@ -149,19 +149,22 @@ const App = () => {
     setShowForm(!showForm);
   };
 
-  // Handle selecting a board and fetching its cards
   const handleSelectBoard = (id) => {
     axios.get(`${KBaseURL}/boards/${id}`)
       .then(response => {
         console.log(response);
         setSelectedBoard(response.data);
-        getCardsForBoardAPI(response.data.id).then((cards) => {
+
+        // Return the promise so the next .then gets the cards
+        return getCardsForBoardAPI(response.data.id);
+      })
+      .then(cards => {
         setCardData(cards);
+        console.log('These are the cards:', cards);
       })
       .catch(error => {
-        console.error('Error fetching boards:', error);
+        console.error('Error fetching board or cards:', error);
       });
-    });
   };
 
   return (

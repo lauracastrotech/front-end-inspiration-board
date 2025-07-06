@@ -4,21 +4,29 @@ import Card from './Card';
 
 const CardList = (props) => {
   const {cards, onDeleteCard, onLikeCard} = props;
-  const getCardComponents = cards.map((card) => {
-    return (
-      <li key={card.id}>
-        <Card
-          id={card.id}
-          message={card.message}
-          likesCount={card.likesCount}
-          onLike={onLikeCard}
-          onDelete={onDeleteCard}
-        />
-      </li>
-    );
-  });
+  const Cards = () => { 
+      return cards.map(card => {
+        return (
+            <li key={card.id}>
+                <Card
+                  id={card.id}
+                  message={card.message}
+                  likesCount={card.likesCount}
+                  onLike={onLikeCard}
+                  onDelete={onDeleteCard}
+                />
+            </li>
+          );
+        });
+      };
 
-  return <ul className='card_list inline'>{getCardComponents}</ul>;
+  return (
+    <div>
+      <ul className='card_list inline'>
+        {cards && <Cards />}
+      </ul>
+    </div>
+  );
 };
 
 CardList.propTypes = {
