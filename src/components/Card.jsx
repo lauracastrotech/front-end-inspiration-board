@@ -1,15 +1,11 @@
 import PropTypes from 'prop-types';
 import './Card.css';
 
-// Card component to display a message and like count, 
-// with a button to like the message, and count how many times it has been liked, 
-// and a delete button to delete the card
-
 const Card = (props) => {
 
   return (
     <section className="card_item">
-      <p>{props.message}</p>
+      <p className='card_message'>{props.message}</p>
       <div className="actions">
         <button 
           className="card_item_like" 

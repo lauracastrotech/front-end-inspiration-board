@@ -8,7 +8,7 @@ import '../styles/NewBoardForm.css';
 const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSelectBoard, onDeleteCard, onLikeCard, onPostCard, showBoardForm, addNewBoard}) => {
 
     const Boards = () => {
-        return boards.map( board => {
+        return boards.map(board => {
             return (
                 <li key={board.id} className="board">
                     <Board 
@@ -16,13 +16,8 @@ const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSel
                         title={board.title} 
                         owner={board.owner} 
                         onSelectBoard={onSelectBoard}
-                        onDeleteCard={onDeleteCard}
-                        onLikeCard={onLikeCard}
-                        onPostCard={onPostCard}
-                        cardDataState={cardDataState}
                     />
                 </li>
-
             );
         });
     };
@@ -35,7 +30,12 @@ const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSel
             </section>
 
             <section className="boards-section">
-                <BoardView selectedBoard={selectedBoard}/>
+                <BoardView 
+                    selectedBoard={selectedBoard} 
+                    onPostCard={onPostCard}
+                    cardDataState={cardDataState}
+                    onDeleteCard={onDeleteCard}
+                    onLikeCard={onLikeCard}/>
             </section>
 
             <section className="boards-section">
