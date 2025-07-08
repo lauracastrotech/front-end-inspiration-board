@@ -66,7 +66,7 @@ const NewBoardForm = ({ onBoardSubmit }) => {
                 </div>  
                     { errorData && 
                         <div> 
-                            <p className="error_message">{errorData}</p> 
+                            <p id="new-board-error" className="error_message">{errorData}</p> 
                         </div> 
                     }
                 <button type="submit" className='create_board_button'>Create Board</button>

@@ -58,3 +58,7 @@
 .create_board_button:focus-visible {
   outline: 2px solid #ffffff;
 }
+
+#new-board-error{
+  color:#36454F;
+}
