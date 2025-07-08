@@ -149,6 +149,7 @@ const App = () => {
   };
 
   const handleSelectBoard = (id) => {
+    setShowForm(false);
     axios.get(`${KBaseURL}/boards/${id}`)
       .then(response => {
         // console.log(response);
