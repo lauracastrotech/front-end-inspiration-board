@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './CardList.css';
+import '../styles/CardList.css';
 import Card from './Card';
 
 const CardList = (props) => {
