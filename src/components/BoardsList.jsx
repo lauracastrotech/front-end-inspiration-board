@@ -36,7 +36,7 @@ const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSel
                     onDeleteCard={onDeleteCard}
                     onLikeCard={onLikeCard}/>
             </section>
-
+        
             <section className="boards-section">
                     {showBoardForm && (
                         <div id="show-form-bg">
