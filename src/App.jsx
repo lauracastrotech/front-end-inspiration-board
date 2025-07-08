@@ -144,6 +144,7 @@ const App = () => {
 
   const updateShowForm = () => {
     setShowForm(!showForm);
+    setSelectedBoard(null); 
   };
 
   const handleSelectBoard = (id) => {
@@ -164,6 +165,10 @@ const App = () => {
       });
   };
 
+  const hideSelectedBoard = () => {
+    setCardData([]);      
+    setSelectedBoard(null);
+  };
   return (
     <div id="app">
       <h1>Inspiration Board</h1>
@@ -179,6 +184,7 @@ const App = () => {
           showBoardForm={showForm}
           updateShowForm={updateShowForm}
           addNewBoard={addBoard}
+          onHideSelectedBoard={hideSelectedBoard}
         />
       </div>
     </div>
