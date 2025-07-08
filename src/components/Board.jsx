@@ -4,6 +4,7 @@ import '../styles/Board.css';
 const Board = (props) => {
   const { title, owner, id, onSelectBoard } = props;
     const viewBoard = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       onSelectBoard(id);
     };
 
