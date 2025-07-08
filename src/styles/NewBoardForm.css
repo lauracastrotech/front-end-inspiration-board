@@ -1,19 +1,17 @@
+.error_message > p {
+  color: #457b9d;
+}
 .board-section {
     display: flex;
     flex-flow: column wrap;
     margin-bottom: 20px;
     padding: 10px;
-}
-
-.board-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  background-color: #2a2f33;
-  padding: 1rem;
-  border-radius: 10px;
-  max-width: 400px;
-  margin: 1rem 0;
+    gap: 0.75rem;
+    background-color: #2a2f33;
+    padding: 1rem;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 1rem 0;
 }
 
 #board-form label {

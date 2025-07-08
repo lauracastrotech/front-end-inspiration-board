@@ -31,7 +31,7 @@ const getAllBoardsFromAPI = () => {
 const addNewBoardAPI = (newBoardData) => {
   return axios.post(`${KBaseURL}/boards`, newBoardData)
     .then(response => {
-      console.log("Raw API response for new board:", response.data);
+      // console.log("Raw API response for new board:", response.data);
       return convertFromApiBoard(response.data);
     })
     .catch(error => {
@@ -42,7 +42,7 @@ const addNewBoardAPI = (newBoardData) => {
 const getCardsForBoardAPI = (boardId) => {
   return axios.get(`${KBaseURL}/boards/${boardId}/cards`)
     .then(response => {
-      console.log("Raw API response for cards:", response.data);
+      // console.log("Raw API response for cards:", response.data);
       return response.data.map(convertFromApiCard);
     })
     .catch(error => {
@@ -51,8 +51,8 @@ const getCardsForBoardAPI = (boardId) => {
 };
 
 const addNewCardAPI = (newCardData) => {
-  console.log("Posting new card:", newCardData);
-  console.log("API URL for new card:", `${KBaseURL}/boards/${newCardData.board_id}/cards`);
+  // console.log("Posting new card:", newCardData);
+  // console.log("API URL for new card:", `${KBaseURL}/boards/${newCardData.board_id}/cards`);
   return axios.post(`${KBaseURL}/boards/${newCardData.board_id}/cards`, newCardData)
     .then((response) => {
       
@@ -74,7 +74,7 @@ const deleteCardAPI = (cardId) => {
 const likeCardAPI = (cardId) => {
   return axios.put(`${KBaseURL}/cards/${cardId}/likes`)
     .then(response => { 
-      console.log("Raw API response for liking card:", response.data); 
+      // console.log("Raw API response for liking card:", response.data); 
       return convertFromApiCard(response.data); 
     })
     .catch(error => {
@@ -96,10 +96,7 @@ const App = () => {
       });
   };
   useEffect(() => {
-    const response = getAllBoards();
-    console.log('this is the response:', response);
-
-    // this returns undefined
+    getAllBoards();
   }, []);
 
   const addBoard = (newBoardData) => {
@@ -152,7 +149,7 @@ const App = () => {
   const handleSelectBoard = (id) => {
     axios.get(`${KBaseURL}/boards/${id}`)
       .then(response => {
-        console.log(response);
+        // console.log(response);
         setSelectedBoard(response.data);
 
         // Return the promise so the next .then gets the cards
@@ -160,7 +157,7 @@ const App = () => {
       })
       .then(cards => {
         setCardData(cards);
-        console.log('These are the cards:', cards);
+        // console.log('These are the cards:', cards);
       })
       .catch(error => {
         console.error('Error fetching board or cards:', error);
@@ -168,7 +165,7 @@ const App = () => {
   };
 
   return (
-    <div className="app">
+    <div id="app">
       <h1>Inspiration Board</h1>
       <div className="boards-list">
         <BoardsList 

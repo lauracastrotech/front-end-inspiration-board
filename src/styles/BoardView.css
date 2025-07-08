@@ -1,0 +1,21 @@
+.board-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 15px;
+    margin-top: 20px;
+}
+#go-back-btn {
+    border: none;
+    background: #457b9d;
+    color: rgba(255, 255, 255, 0.87);
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 1px rgba(255, 255, 255);
+}

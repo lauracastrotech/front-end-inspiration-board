@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import './NewCardForm.css';
+import '../styles/NewCardForm.css';
 
 const NewCardForm = ({ onPostCard, boardId }) => {
   const [formData, setFormData] = useState({
@@ -47,7 +47,7 @@ const NewCardForm = ({ onPostCard, boardId }) => {
 
   return (
     <form className="new_card_form" onSubmit={handleSubmit}>
-      <label htmlFor="message">Message</label>
+      <label htmlFor="message">New Message</label>
       <input
         type="text"
         id="message"
@@ -60,7 +60,7 @@ const NewCardForm = ({ onPostCard, boardId }) => {
       <div className="message_preview">Preview: <span>{formData.message}</span></div>
       <button type="submit" className='add_card_button'>Submit</button>
     </form>
-  )
+  );
 };
 
 NewCardForm.propTypes = {
