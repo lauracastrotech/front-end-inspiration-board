@@ -5,6 +5,7 @@ import NewBoardForm from './components/NewBoardForm';
 import BoardView from './components/BoardView';
 import axios from 'axios';
 import BoardsList from './components/BoardsList';
+import SortDropdown from './components/SortDropdown';
 
 const KBaseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -87,6 +88,7 @@ const App = () => {
   const [selectedBoard, setSelectedBoard] = useState(null);
   const [cardData, setCardData] = useState([]); // all cards
   const [showForm, setShowForm] = useState(false); // board form
+  const [sortOption, setSortOption] = useState(null);
 
   // Fetch all boards on mount
   const getAllBoards = () => {
@@ -159,17 +161,53 @@ const App = () => {
         return getCardsForBoardAPI(response.data.id);
       })
       .then(cards => {
-        setCardData(cards);
-        console.log('These are the cards:', cards);
+        if (sortOption) {
+          const sortedCards = [...cards].sort((a, b) => {
+            if (a[sortOption.property] > b[sortOption.property]) return 1 * sortOption.order;
+            if (a[sortOption.property] < b[sortOption.property]) return -1 * sortOption.order;
+            return 0;
+          });
+          setCardData(sortedCards);
+        } else {
+          setCardData(cards);
+          console.log('These are the cards:', cards);
+        }
       })
+      // .then(cards => {
+      //   setCardData(cards);
+      //   console.log('These are the cards:', cards);
+      // })
       .catch(error => {
         console.error('Error fetching board or cards:', error);
       });
   };
+  
+  const handleSortChange = (e) => {
+    const selected = e.target.value === '' ? null : sortOptions.find(opt => opt.title === e.target.value);
+    setSortOption(selected);
+    if (selected && cardData.length > 0) {
+      const sorted = [...cardData].sort((a, b) => {
+        if (a[selected.property] > b[selected.property]) return 1 * selected.order;
+        if (a[selected.property] < b[selected.property]) return -1 * selected.order;
+        return 0;
+      });
+      setCardData(sorted);
+    }
+  };
+  
+  const sortOptions = [
+    { title: 'ID (Ascending)', property: 'id', order: 1 },
+    { title: 'ID (Descending)', property: 'id', order: -1 },
+    { title: 'Message (A → Z)', property: 'message', order: 1 },
+    { title: 'Message (Z → A)', property: 'message', order: -1 },
+    { title: 'Likes (Low → High)', property: 'likesCount', order: 1 },
+    { title: 'Likes (High → Low)', property: 'likesCount', order: -1 },
+  ];
 
   return (
     <div className="app">
       <h1>Inspiration Board</h1>
+      <SortDropdown options={sortOptions} onChange={handleSortChange} />
       <div className="boards-list">
         <BoardsList 
           boards={boardData}
