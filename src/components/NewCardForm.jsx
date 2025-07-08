@@ -47,7 +47,7 @@ const NewCardForm = ({ onPostCard, boardId }) => {
 
   return (
     <form className="new_card_form" onSubmit={handleSubmit}>
-      <label htmlFor="message">Message</label>
+      <label htmlFor="message">New Message</label>
       <input
         type="text"
         id="message"

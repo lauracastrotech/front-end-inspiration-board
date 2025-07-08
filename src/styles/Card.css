@@ -1,8 +1,8 @@
 .card_item {
-  background: white;
+  background-color:#457b9d;
   border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 12px;
+  padding: 10px;
+  margin: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease-in-out;
   max-width: 100%;
@@ -20,8 +20,9 @@
   margin: 0 0 12px 0;
   font-size: 16px;
   line-height: 1.5;
-  color: #333;
+  color: rgba(255, 255, 255, 0.87);
   word-wrap: break-word;
+  text-align: center;
 }
 
 #style-buttons {
@@ -40,13 +41,11 @@
 
 #like-btn {
   padding: 10px 15px;
-  background-color: #457b9d;
-  color: white;
-  font-size: 14px;
+  color: #36454F;
+  font-size: 16px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 2px 2px 1px  #36454F;
   transition: all 0.3s ease;
 }
 
@@ -76,13 +75,10 @@
 
 #delete-btn {
   padding: 5px 10px;
-  background-color: #457b9d;
-  color: white;
-  font-size: 14px;
+  font-size: 16px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 2px 2px 1px #1d3557;
   transition: all 0.3s ease;
 }
 

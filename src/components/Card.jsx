@@ -11,12 +11,12 @@ const Card = (props) => {
           id='like-btn'
           className="card_item_like" 
           onClick={() => props.onLike(props.id)}
-        >{props.likesCount} 💕</button>
+        >{props.likesCount} 💙</button>
         <button 
           id='delete-btn'
           className="card_item_delete" 
           onClick={() => props.onDelete(props.id)}
-        >Delete</button>
+        ><img src='/icon-delete.png' alt='delete a card from this board'/></button>
       </div>
     </section>
   );
