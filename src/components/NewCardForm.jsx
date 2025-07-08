@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import './NewCardForm.css';
+import '../styles/NewCardForm.css';
 
 const NewCardForm = ({ onPostCard, boardId }) => {
   const [formData, setFormData] = useState({
