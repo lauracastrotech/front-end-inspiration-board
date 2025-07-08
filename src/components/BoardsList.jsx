@@ -4,7 +4,7 @@ import BoardView from "./BoardView";
 import "../styles/BoardsList.css";
 import '../styles/NewBoardForm.css';
 
-const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSelectBoard, onDeleteCard, onLikeCard, onPostCard, showBoardForm, addNewBoard}) => {
+const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSelectBoard, onDeleteCard, onLikeCard, onPostCard, showBoardForm, addNewBoard, onHideSelectedBoard }) => {
 
     const Boards = () => {
         return boards.map(board => {
@@ -34,7 +34,9 @@ const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSel
                     onPostCard={onPostCard}
                     cardDataState={cardDataState}
                     onDeleteCard={onDeleteCard}
-                    onLikeCard={onLikeCard}/>
+                    onLikeCard={onLikeCard}
+                    onHideSelectedBoard={onHideSelectedBoard}
+                    />
             </section>
 
             <section className="boards-section">

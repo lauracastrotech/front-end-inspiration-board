@@ -3,7 +3,7 @@ import CardList from "./CardList";
 import "../styles/BoardView.css";
 import { useState, useEffect } from "react";
 
-const BoardView = ({ selectedBoard, onPostCard, onDeleteCard, onLikeCard, cardDataState }) => {
+const BoardView = ({ selectedBoard, onPostCard, onDeleteCard, onLikeCard, cardDataState, onHideSelectedBoard }) => {
     const [sortOption, setSortOption] = useState("");
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const BoardView = ({ selectedBoard, onPostCard, onDeleteCard, onLikeCard, cardDa
                 {
                     selectedBoard && (
                         <> 
-                            <button>&lt; All Boards</button>                       
+                            <button onClick={onHideSelectedBoard}>&lt; All Boards</button>                       
                             <NewCardForm 
                                 onPostCard={onPostCard} 
                                 boardId={selectedBoard.id} /> 
