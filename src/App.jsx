@@ -145,6 +145,7 @@ const App = () => {
   const updateShowForm = () => {
     setShowForm(!showForm);
     setSelectedBoard(null); 
+    setCardData([]);
   };
 
   const handleSelectBoard = (id) => {
@@ -168,6 +169,7 @@ const App = () => {
   const hideSelectedBoard = () => {
     setCardData([]);      
     setSelectedBoard(null);
+    setShowForm(false);
   };
   return (
     <div id="app">
