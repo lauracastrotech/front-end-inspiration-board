@@ -2,7 +2,6 @@ import Board from "./Board";
 import NewBoardForm from "./NewBoardForm";
 import BoardView from "./BoardView";
 import "../styles/BoardsList.css";
-import '../styles/Board.css';
 import '../styles/NewBoardForm.css';
 
 const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSelectBoard, onDeleteCard, onLikeCard, onPostCard, showBoardForm, addNewBoard}) => {

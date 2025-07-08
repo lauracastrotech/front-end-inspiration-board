@@ -168,7 +168,7 @@ const App = () => {
   };
 
   return (
-    <div className="app">
+    <div id="app">
       <h1>Inspiration Board</h1>
       <div className="boards-list">
         <BoardsList 
