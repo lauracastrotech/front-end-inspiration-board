@@ -1,1 +1,65 @@
 
+.new_card_form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 12px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.new_card_form label {
+  font-weight: 600;
+}
+
+.new_card_form input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border 0.2s ease-in-out;
+}
+
+.new_card_form input.error {
+  border-color: #d9534f; /* Bootstrap-like error red */
+  background-color: #ffe6e6;
+}
+
+.error_message {
+  color: #ccc;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: -8px;
+  margin-bottom: 4px;
+}
+
+.message_preview {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  font-size: 12px;
+  color: #333;
+}
+
+.message_preview span {
+  font-style: italic;
+  color: #555;
+}
+
+.add_card_button {
+    padding: 10px 15px;
+    background-color: #36454F;
+    color: white;
+    border: none;
+    border-radius: 10px; 
+    cursor: pointer;
+    box-shadow: 2px 2px 1px rgba(255, 255, 255);
+}
+
+.add_card_button:hover {
+  background-color: #2c3a44;
+}
+

@@ -60,7 +60,7 @@ const NewCardForm = ({ onPostCard, boardId }) => {
       <div className="message_preview">Preview: <span>{formData.message}</span></div>
       <button type="submit" className='add_card_button'>Submit</button>
     </form>
-  )
+  );
 };
 
 NewCardForm.propTypes = {
