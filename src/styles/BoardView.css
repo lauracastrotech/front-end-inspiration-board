@@ -19,3 +19,23 @@
     cursor: pointer;
     box-shadow: 2px 2px 1px rgba(255, 255, 255);
 }
+
+#sort-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+    padding-left: 15px;
+    overflow: visible;
+}
+
+#sortOption {
+    border-radius: 5px;
+    padding: 5px;
+    color: #457b9d;
+}
+
+#sortOption:focus {
+    background-color:rgba(255, 255, 255);
+    color: #36454F;
+}

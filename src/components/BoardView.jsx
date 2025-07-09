@@ -34,13 +34,15 @@ const BoardView = ({ selectedBoard, onPostCard, onDeleteCard, onLikeCard, cardDa
                             <NewCardForm 
                                 onPostCard={onPostCard} 
                                 boardId={selectedBoard.id} /> 
-                            <label htmlFor="sortOption">Sort Cards By:</label>
-                            <select id="sortOption" value={sortOption} onChange={handleSortChange}>
-                                <option value="">Default</option>
-                                <option value="alpha">Alphabetical</option>
-                                <option value="likes">Likes</option>
-                                <option value="id">ID</option>
-                            </select>
+                            <div id="sort-container">
+                                <label htmlFor="sortOption">Sort Cards By:</label>
+                                <select id="sortOption" value={sortOption} onChange={handleSortChange}>
+                                    <option value="">Default</option>
+                                    <option value="alpha">Alphabetical</option>
+                                    <option value="likes">Likes</option>
+                                    <option value="id">ID</option>
+                                </select>
+                            </div>
                             <CardList
                                 cards={getSortedCards()}
                                 onDeleteCard={onDeleteCard}
