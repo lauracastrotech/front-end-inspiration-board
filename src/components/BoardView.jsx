@@ -30,7 +30,7 @@ const BoardView = ({ selectedBoard, onPostCard, onDeleteCard, onLikeCard, cardDa
                 {
                     selectedBoard && (
                         <> 
-                            <button onClick={onHideSelectedBoard}>&lt; All Boards</button>                       
+                            <button id="all-boards-btn" onClick={onHideSelectedBoard}>&lt; All Boards</button>                       
                             <NewCardForm 
                                 onPostCard={onPostCard} 
                                 boardId={selectedBoard.id} /> 

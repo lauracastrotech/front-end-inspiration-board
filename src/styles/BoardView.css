@@ -39,3 +39,14 @@
     background-color:rgba(255, 255, 255);
     color: #36454F;
 }
+
+#all-boards-btn {
+    margin-left: 15px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px; 
+    box-shadow: 2px 2px 1px #457b9d;;
+    background-color:rgba(255, 255, 255);
+    color: #36454F;
+    font-weight: bold;
+}
