@@ -133,6 +133,7 @@ const App = () => {
               : board
           )
         );
+        setCardData((prevCardData) => [...prevCardData, newCard]);
       })
       .catch((error) => {
         console.error('Error adding card:', error);
@@ -147,7 +148,7 @@ const App = () => {
           if (!prevBoard) return null;
           return {
             ...prevBoard,
-            cards: (prevBoard.cards || []).filter((card) => card.id !== cardId.id),
+            cards: (prevBoard.cards || []).filter((card) => card.id !== cardId),
           };
         });
 
@@ -160,7 +161,7 @@ const App = () => {
         );
 
         setCardData((prevCardData) =>
-          prevCardData.filter(card => card.id !== cardId.id)
+          prevCardData.filter(card => card.id !== cardId)
         );
       })
       .catch((error) => {

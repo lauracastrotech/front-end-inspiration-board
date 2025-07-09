@@ -3,7 +3,7 @@ import '../styles/CardList.css';
 import Card from './Card';
 
 const CardList = (props) => {
-  const {cards, onDeleteCard, onLikeCard} = props;
+  const {cards, boardId, onDeleteCard, onLikeCard} = props;
   const Cards = () => { 
       return cards.map(card => {
         return (
@@ -14,6 +14,7 @@ const CardList = (props) => {
                   likesCount={card.likesCount}
                   onLike={onLikeCard}
                   onDelete={onDeleteCard}
+                  boardId={boardId}
                 />
             </li>
           );

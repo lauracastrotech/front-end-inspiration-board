@@ -47,6 +47,7 @@ const BoardView = ({ selectedBoard, onPostCard, onDeleteCard, onLikeCard, cardDa
                                 cards={getSortedCards()}
                                 onDeleteCard={onDeleteCard}
                                 onLikeCard={onLikeCard}
+                                boardId={selectedBoard.id}
                             /> 
                         </>
                     )
