@@ -4,7 +4,7 @@ import BoardView from "./BoardView";
 import "../styles/BoardsList.css";
 import '../styles/NewBoardForm.css';
 
-const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSelectBoard, onDeleteCard, onLikeCard, onPostCard, showBoardForm, addNewBoard, onHideSelectedBoard }) => {
+const BoardsList = ({ boards, cardDataState, updateShowForm, selectedBoard, onSelectBoard, onDeleteCard, onLikeCard, onPostCard, showBoardForm, addNewBoard, onHideSelectedBoard }) => {
 
     const Boards = () => {
         return boards.map(board => {
