@@ -111,10 +111,13 @@ const App = () => {
 
 
   const addCard = (boardId, newCardData) => {
-    axios.post(`${KBaseURL}/boards/${boardId}/cards`, newCardData)
-      .then((response) => {
-        const newCard = convertFromApiCard(response.data);
+    const cardDataWithBoardId = {
+    ...newCardData,
+    board_id: boardId
+    };
 
+    return addNewCardAPI(cardDataWithBoardId)
+      .then((newCard) => {
         setSelectedBoard((prevBoard) => {
           if (!prevBoard) return null;
           return {
@@ -138,13 +141,13 @@ const App = () => {
 
 
   const deleteCard = (boardId, cardId) => {
-    axios.delete(`${KBaseURL}/cards/${cardId}`)
+    return deleteCardAPI(cardId)
       .then(() => {
         setSelectedBoard((prevBoard) => {
           if (!prevBoard) return null;
           return {
             ...prevBoard,
-            cards: (prevBoard.cards || []).filter((card) => card.id !== cardId),
+            cards: (prevBoard.cards || []).filter((card) => card.id !== cardId.id),
           };
         });
 
@@ -154,6 +157,10 @@ const App = () => {
               ? { ...board, cards_count: Math.max(0, (board.cards_count || 1) - 1) }
               : board
           )
+        );
+
+        setCardData((prevCardData) =>
+          prevCardData.filter(card => card.id !== cardId.id)
         );
       })
       .catch((error) => {

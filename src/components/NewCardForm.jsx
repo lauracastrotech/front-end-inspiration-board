@@ -29,7 +29,7 @@ const NewCardForm = ({ onPostCard, boardId }) => {
     }
 
     setErrorData('');
-    onPostCard(formData);
+    onPostCard(boardId, formData);
     setFormData({
       message: '',
       board_id: boardId,
@@ -65,5 +65,6 @@ const NewCardForm = ({ onPostCard, boardId }) => {
 
 NewCardForm.propTypes = {
   onPostCard: PropTypes.func.isRequired,
+  boardId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 export default NewCardForm;
