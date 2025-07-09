@@ -9,8 +9,8 @@ import BoardsList from './components/BoardsList';
 const KBaseURL = import.meta.env.VITE_API_BASE_URL;
 
 const convertFromApiBoard = (board) => {
-  const { id: boardId, title, owner, cards } = board;
-  return { id: boardId, title, owner, cards };
+  const { id: boardId, title, owner, cards_count = 0, cards } = board;
+  return { id: boardId, title, owner, cards_count, cards };
 };
 
 const convertFromApiCard = (card) => {
@@ -109,21 +109,55 @@ const App = () => {
       });
   };
 
-  const addCard = (newCardData) => {
-    return addNewCardAPI(newCardData)
-      .then((newCard) => {
-        setCardData((cardData) => {
-          return [...cardData, newCard];
+
+  const addCard = (boardId, newCardData) => {
+    axios.post(`${KBaseURL}/boards/${boardId}/cards`, newCardData)
+      .then((response) => {
+        const newCard = convertFromApiCard(response.data);
+
+        setSelectedBoard((prevBoard) => {
+          if (!prevBoard) return null;
+          return {
+            ...prevBoard,
+            cards: [...(prevBoard.cards || []), newCard],
+          };
         });
+
+        setBoardData((prevBoards) =>
+          prevBoards.map((board) =>
+            board.id === boardId
+              ? { ...board, cards_count: (board.cards_count || 0) + 1 }
+              : board
+          )
+        );
+      })
+      .catch((error) => {
+        console.error('Error adding card:', error);
       });
   };
 
-  const deleteCard = (cardId) => {
-    return deleteCardAPI(cardId)
+
+  const deleteCard = (boardId, cardId) => {
+    axios.delete(`${KBaseURL}/cards/${cardId}`)
       .then(() => {
-        setCardData((cardData) => {
-          return cardData.filter(card => card.id !== cardId);
+        setSelectedBoard((prevBoard) => {
+          if (!prevBoard) return null;
+          return {
+            ...prevBoard,
+            cards: (prevBoard.cards || []).filter((card) => card.id !== cardId),
+          };
         });
+
+        setBoardData((prevBoards) =>
+          prevBoards.map((board) =>
+            board.id === boardId
+              ? { ...board, cards_count: Math.max(0, (board.cards_count || 1) - 1) }
+              : board
+          )
+        );
+      })
+      .catch((error) => {
+        console.error('Error deleting card:', error);
       });
   };
 

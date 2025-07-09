@@ -14,6 +14,7 @@ const BoardsList = ({boards, cardDataState, updateShowForm, selectedBoard, onSel
                         id={board.id}
                         title={board.title} 
                         owner={board.owner} 
+                        cards_count={board.cards_count} //
                         onSelectBoard={onSelectBoard}
                     />
                 </li>
