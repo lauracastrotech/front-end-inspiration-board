@@ -33,6 +33,7 @@
     border-radius: 5px;
     padding: 5px;
     color: #457b9d;
+    font-weight: bold;
 }
 
 #sortOption:focus {
