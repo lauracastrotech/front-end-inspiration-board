@@ -87,6 +87,7 @@ const App = () => {
   const [selectedBoard, setSelectedBoard] = useState(null);
   const [cardData, setCardData] = useState([]); // all cards
   const [showForm, setShowForm] = useState(false); // board form
+  const [loading, setLoading] = useState(true);
 
   // Fetch all boards on mount
   const getAllBoards = () => {
@@ -96,10 +97,10 @@ const App = () => {
       });
   };
   useEffect(() => {
-    const response = getAllBoards();
-    console.log('this is the response:', response);
-
-    // this returns undefined
+    getAllBoards()
+    .then(() => {
+      setLoading(false);
+    });
   }, []);
 
   const addBoard = (newBoardData) => {
@@ -169,21 +170,30 @@ const App = () => {
 
   return (
     <div id="app">
-      <h1>Inspiration Board</h1>
-      <div className="boards-list">
-        <BoardsList 
-          boards={boardData}
-          selectedBoard={selectedBoard}
-          cardDataState={cardData}
-          onSelectBoard={handleSelectBoard}
-          onDeleteCard={deleteCard}
-          onLikeCard={likeCardHandler}
-          onPostCard={addCard}
-          showBoardForm={showForm}
-          updateShowForm={updateShowForm}
-          addNewBoard={addBoard}
-        />
-      </div>
+      {
+        loading ? (
+          <div>
+            <h1>Loading...</h1>
+          </div>
+        ) : (
+          <>
+            <h1>Inspiration Board</h1>
+            <div className="boards-list">
+              <BoardsList 
+                boards={boardData}
+                selectedBoard={selectedBoard}
+                cardDataState={cardData}
+                onSelectBoard={handleSelectBoard}
+                onDeleteCard={deleteCard}
+                onLikeCard={likeCardHandler}
+                onPostCard={addCard}
+                showBoardForm={showForm}
+                updateShowForm={updateShowForm}
+                addNewBoard={addBoard}
+              />
+            </div>
+          </>
+        )}   
     </div>
   );
 };
