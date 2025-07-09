@@ -1,3 +1,7 @@
+#new-board-error{
+  color:#36454F;
+}
+
 .board-section {
     display: flex;
     flex-flow: column wrap;
@@ -59,6 +63,3 @@
   outline: 2px solid #ffffff;
 }
 
-#new-board-error{
-  color:#36454F;
-}
