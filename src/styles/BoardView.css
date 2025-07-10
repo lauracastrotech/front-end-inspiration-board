@@ -51,3 +51,16 @@
     color: #36454F;
     font-weight: bold;
 }
+
+#board-title-owner {
+    color: white;
+    padding: 15px 15px 0px 15px;
+}
+
+#board-owner {
+    font-size: 12px;
+}
+
+#board-title {
+    font-weight: bold;
+}
