@@ -31,6 +31,10 @@ const BoardView = ({ selectedBoard, onPostCard, onDeleteCard, onLikeCard, cardDa
                     selectedBoard && (
                         <> 
                             <button id="all-boards-btn" onClick={onHideSelectedBoard}>&lt; All Boards</button>                       
+                            <section id='board-title-owner'>
+                                <h3>{selectedBoard.title}</h3>
+                                <span>Created by {selectedBoard.owner}</span>
+                            </section>
                             <NewCardForm 
                                 onPostCard={onPostCard} 
                                 boardId={selectedBoard.id} /> 
